@@ -20,6 +20,9 @@ install:
   - if [ -n "$BUILD_COMMIT" ]; then
         checkout_commit $REPO_DIR $BUILD_COMMIT;
     fi
+  # Copy Python 3 patched setup_egg.py into distribution
+  - cp patches/setup_egg.py nipy
+  # Build, install wheel
   - cd nipy
   - python setup_egg.py bdist_wheel
   - delocate-listdeps dist/*.whl # lists library dependencies
@@ -33,7 +36,7 @@ script:
   - mkdir tmp_for_test
   - cd tmp_for_test
   # Run the tests
-  - python ../tools/nipnost nipy
+  - python ./nipy/tools/nipnost nipy
   - cd ..
 before_deploy:
   - cd $REPO_DIR/dist
