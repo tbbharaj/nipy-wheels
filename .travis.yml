@@ -12,6 +12,9 @@ env:
   - VERSION=3.5.0 NUMPY_VERSION=1.7.1
 install:
   - source terryfy/travis_tools.sh
+  # Enforce clang to avoid excessive compile warnings on Python 3.5
+  - export CC=clang
+  - export CXX=clang++
   - get_python_environment macpython $VERSION venv
   # Update to latest wheel package for Python 3.5
   - pip install -U wheel
@@ -32,6 +35,10 @@ install:
   - cd ..
 script:
   # install dependencies for tests e.g - pip install nose
+  # Fix numpy ast errors in tests by upgrading numpy
+  - if [ -n "$(pyver_ge $VERSION 3.4.0)" ]; then
+        pip install --upgrade numpy;
+    fi
   - pip install nose
   - mkdir tmp_for_test
   - cd tmp_for_test
