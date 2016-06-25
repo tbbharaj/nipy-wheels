@@ -71,7 +71,8 @@ matrix:
 
 before_install:
     - BUILD_DEPENDS="$NP_BUILD_DEP Cython nibabel sympy scipy"
-    - TEST_DEPENDS="$NP_TEST_DEP nose nibabel sympy scipy $GEN_DEPS"
+    # Pin scipy and sympy versions for tests fixed since 0.4.0
+    - TEST_DEPENDS="$NP_TEST_DEP nose nibabel sympy==0.7.6 scipy==0.16.1"
     - source multibuild/common_utils.sh
     - source multibuild/travis_steps.sh
     - before_install
