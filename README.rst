@@ -8,6 +8,9 @@ the travis-ci OSX machines and the travis-ci Linux machines.
 The travis-ci interface for the builds is
 https://travis-ci.org/MacPython/nipy-wheels
 
+Appveyor interface at
+https://ci.appveyor.com/project/matthew-brett/nipy-wheels
+
 The driving github repository is
 https://github.com/MacPython/nipy-wheels
 
@@ -38,8 +41,8 @@ directory pointed to by http://wheels.scipy.org.
 Triggering a build
 ==================
 
-You will likely want to edit the ``.travis.yml`` file to specify the
-``BUILD_COMMIT`` before triggering a build - see below.
+You will likely want to edit the ``.travis.yml`` and ``appveyor.yml`` files to
+specify the ``BUILD_COMMIT`` before triggering a build - see below.
 
 You will need write permission to the github repository to trigger new builds
 on the travis-ci interface.  Contact us on the mailing list if you need this.
@@ -60,8 +63,9 @@ Which nipy commit does the repository build?
 ============================================
 
 The ``nipy-wheels`` repository will build the commit specified in the
-``BUILD_COMMIT`` at the top of the ``.travis.yml`` file.  This can be any
-naming of a commit, including branch name, tag name or commit hash.
+``BUILD_COMMIT`` at the top of the ``.travis.yml`` and ``appveyor.yml`` files.
+This can be any naming of a commit, including branch name, tag name or commit
+hash.
 
 Uploading the built wheels to pypi
 ==================================
@@ -86,9 +90,11 @@ You will typically have a directory on your machine where you store wheels,
 called a `wheelhouse`.   The typical call for `wheel-uploader` would then
 be something like::
 
+    VERSION=0.4.0
     CDN_URL=https://3f23b170c54c2533c070-1c8a9b3114517dc5fe17b7c3f8c63a43.ssl.cf2.rackcdn.com
-    wheel-uploader -r warehouse -u $CDN_URL -s -v -w ~/wheelhouse -t macosx nipy 0.4.0
-    wheel-uploader -r warehouse -u $CDN_URL -s -v -w ~/wheelhouse -t manylinux1 nipy 0.4.0
+    wheel-uploader -r warehouse -u $CDN_URL -s -v -w ~/wheelhouse -t macosx nipy $VERSION
+    wheel-uploader -r warehouse -u $CDN_URL -s -v -w ~/wheelhouse -t manylinux1 nipy $VERSION
+    wheel-uploader -r warehouse -u $CDN_URL -s -v -w ~/wheelhouse -t win nipy $VERSION
 
 where:
 
