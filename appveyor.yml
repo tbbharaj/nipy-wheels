@@ -29,6 +29,7 @@ install:
   # Install the dependencies of the project.
   - pip install %NP_BUILD_DEP% Cython nose nibabel sympy scipy
   - pip install wheel
+  - git submodule update --init
   - pip wheel .\nipy -w dist
 
 build: false  # Not a C# project, build stuff at the test step instead.
@@ -36,6 +37,7 @@ build: false  # Not a C# project, build stuff at the test step instead.
 test_script:
   # Change into an innocuous directory and find tests from installation
   - pip install %NP_TEST_DEP%
+  - pip install --pre --no-index --find-links .\nipy
   - pip install -f .\dist --no-index nipy
   - mkdir for_testing
   - cd for_testing
