@@ -99,8 +99,8 @@ matrix:
         - SP_DEP=scipy
 
 before_install:
-    - BUILD_DEPENDS="$NP_BUILD_DEP Cython nibabel sympy scipy"
-    - TEST_DEPENDS="$NP_TEST_DEP nose nibabel sympy scipy"
+    - BUILD_DEPENDS="$NP_BUILD_DEP Cython nibabel sympy $SP_DEP"
+    - TEST_DEPENDS="$NP_TEST_DEP nose nibabel sympy $SP_DEP"
     - source multibuild/common_utils.sh
     - source multibuild/travis_steps.sh
     - before_install
