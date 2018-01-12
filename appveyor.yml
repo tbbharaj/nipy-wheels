@@ -28,7 +28,7 @@ install:
 
   # Install the dependencies of the project.
   - pip install %NP_BUILD_DEP% Cython nose nibabel sympy scipy
-  - mkdir dist
+  - pip install wheel
   - pip wheel .\nipy -w dist
 
 build: false  # Not a C# project, build stuff at the test step instead.
