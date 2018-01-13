@@ -26,9 +26,15 @@ install:
   # the parent CMD process).
   - SET PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
 
+  # Fix MSVC builds for 64-bit Python. See:
+  # http://stackoverflow.com/questions/32091593/cannot-install-windows-sdk-7-1-on-windows-10
+  - echo "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 > "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\amd64/vcvars64.bat"
+
   # Install the dependencies of the project.
   - pip install %NP_BUILD_DEP% Cython nose nibabel sympy scipy
-  - pip install wheel
+  # Pin wheel to 0.26 to avoid Windows ABI tag for built wheel
+  - pip install wheel==0.26
+  # Build wheel
   - git submodule update --init
   - pip wheel .\nipy -w dist
 
