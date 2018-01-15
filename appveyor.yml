@@ -44,8 +44,8 @@ install:
   - pip install wheel==0.26
   # Build wheel
   - cd nipy
-  - git checkout %BUILD_COMMIT%
   - git submodule update --init
+  - git checkout %BUILD_COMMIT%
   - python setup.py bdist_wheel
   - cd ..
 
