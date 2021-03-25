@@ -4,11 +4,9 @@ env:
       - BUILD_COMMIT=master
       - PLAT=x86_64
       - UNICODE_WIDTH=32
-      - NP_BUILD_DEP="numpy==1.7.1"
-      - NP_TEST_DEP="numpy==1.7.1"
-      # Scipy 1.0 depends on numpy 1.8.2.  Rather than force this, use an
-      # older scipy by default.
-      - SP_DEP="scipy==0.18.0"
+      - NP_BUILD_DEP="numpy==1.13"
+      - NP_TEST_DEP="numpy==1.13"
+      - SP_DEP="scipy==1.0.0"
       - WHEELHOUSE_UPLOADER_USERNAME=travis-worker
       # Following generated with
       # travis encrypt -r MacPython/nipy-wheels WHEELHOUSE_UPLOADER_SECRET=<the api key>
@@ -45,36 +43,35 @@ matrix:
         - UNICODE_WIDTH=16
     - os: linux
       env:
-        - MB_PYTHON_VERSION=3.4
-        - NP_TEST_DEP=numpy==1.8.1
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.4
-        - NP_TEST_DEP=numpy==1.8.1
-        - PLAT=i686
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.5
-        - NP_BUILD_DEP=numpy==1.9.3
-        - NP_TEST_DEP=numpy==1.9.3
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.5
-        - PLAT=i686
-        - NP_BUILD_DEP=numpy==1.9.3
-        - NP_TEST_DEP=numpy==1.9.3
+        - MB_PYTHON_VERSION=3.6
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.6
-        - NP_BUILD_DEP=numpy==1.11.3
-        - NP_TEST_DEP=numpy==1.11.3
+        - PLAT=i686
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.7
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.7
+        - PLAT=i686
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.8
         - SP_DEP=scipy
     - os: linux
       env:
-        - MB_PYTHON_VERSION=3.6
+        - MB_PYTHON_VERSION=3.8
         - PLAT=i686
-        - NP_BUILD_DEP=numpy==1.11.3
-        - NP_TEST_DEP=numpy==1.11.3
+        - SP_DEP=scipy
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.9
+        - SP_DEP=scipy
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.9
+        - PLAT=i686
         - SP_DEP=scipy
     - os: osx
       language: generic
@@ -82,20 +79,21 @@ matrix:
     - os: osx
       language: generic
       env:
-        - MB_PYTHON_VERSION=3.4
-        - NP_TEST_DEP=numpy==1.8.1
-    - os: osx
-      language: generic
-      env:
-        - MB_PYTHON_VERSION=3.5
-        - NP_BUILD_DEP=numpy==1.9.3
-        - NP_TEST_DEP=numpy==1.9.3
-    - os: osx
-      language: generic
-      env:
         - MB_PYTHON_VERSION=3.6
-        - NP_BUILD_DEP=numpy==1.11.3
-        - NP_TEST_DEP=numpy==1.11.3
+    - os: osx
+      language: generic
+      env:
+        - MB_PYTHON_VERSION=3.7
+        - SP_DEP=scipy
+    - os: osx
+      language: generic
+      env:
+        - MB_PYTHON_VERSION=3.8
+        - SP_DEP=scipy
+    - os: osx
+      language: generic
+      env:
+        - MB_PYTHON_VERSION=3.9
         - SP_DEP=scipy
 
 before_install:

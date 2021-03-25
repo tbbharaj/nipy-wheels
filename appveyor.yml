@@ -4,8 +4,8 @@
 environment:
   global:
     BUILD_COMMIT: master
-    NP_BUILD_DEP: "numpy==1.10.4"
-    NP_TEST_DEP: "numpy==1.10.4"
+    NP_BUILD_DEP: "numpy==1.13"
+    NP_TEST_DEP: "numpy==1.13"
     EXTRA_FLAGS: ""
     WHEELHOUSE_UPLOADER_USERNAME: travis-worker
     WHEELHOUSE_UPLOADER_SECRET:
@@ -16,16 +16,19 @@ environment:
     - PYTHON: C:\Python27-x64
       # Doctest fail from the Ls as in (1L, 2L) != (1, 2)
       EXTRA_FLAGS: "--without-doctest"
-    - PYTHON: C:\Python34
-    - PYTHON: C:\Python34-x64
-    - PYTHON: C:\Python35
-    - PYTHON: C:\Python35-x64
     - PYTHON: C:\Python36
-      NP_BUILD_DEP: "numpy==1.12"
-      NP_TEST_DEP: "numpy==1.12"
     - PYTHON: C:\Python36-x64
-      NP_BUILD_DEP: "numpy==1.12"
-      NP_TEST_DEP: "numpy==1.12"
+    - PYTHON: C:\Python37
+    - PYTHON: C:\Python37-x64
+    - PYTHON: C:\Python38
+      # https://stackoverflow.com/a/58582651/1939576
+      EXTRA_FLAGS: "--traverse-namespace"
+    - PYTHON: C:\Python38-x64
+      EXTRA_FLAGS: "--traverse-namespace"
+    - PYTHON: C:\Python39
+      EXTRA_FLAGS: "--traverse-namespace"
+    - PYTHON: C:\Python39-x64
+      EXTRA_FLAGS: "--traverse-namespace"
 
 install:
   # Prepend newly installed Python to the PATH of this build (this cannot be
