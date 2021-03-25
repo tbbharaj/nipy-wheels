@@ -7,11 +7,6 @@ env:
       - NP_BUILD_DEP="numpy==1.13"
       - NP_TEST_DEP="numpy==1.13"
       - SP_DEP="scipy==1.0.0"
-      - WHEELHOUSE_UPLOADER_USERNAME=travis-worker
-      # Following generated with
-      # travis encrypt -r MacPython/nipy-wheels WHEELHOUSE_UPLOADER_SECRET=<the api key>
-      - secure:
-          "tTU4G20WWCaqndFpBz4u9nXIO1bFQMWsDCLWdexTHk6KXVFrL+OzUdnWdSTOgnZcHf96CAQhkWo1FAJAhZfbGff+gE8N2O4nPGvoiQjjGf4IkWuhBzhLv6kXQvTtlteOM8+ksPoia5A5/J3/fdI3GPpAPpGngyys2pCgrl7BYrkUG+448fTyyorb3rLVnW+r4f2HbaZtkuq8pEwN+YfPlfvDZt0E+L4gB4t0FUNN3yVFEAfwlW7tuwQcK8V3KyQVFEYOBsuyNd6+4G39f3E+TzKVw1nLPGHRQMIPHdTwDKCIWEfTyEmAa0isB5m4OB4achEZA30G+4NEGSuM92LAmxmqeA9TM4XgCaTldm95pBzBKxTB9gKibeRueIYbscVqp3EFiB5Kms8ukyyN9T6Z/yflvLR6aGLTGwXOZBgtuFDyXzx/QqjJCyNAMy5/F4qTOnJe5dWBh7u/AjV7PERGHIrXvQyypYmAfUlX3sN+tEHUS5TxcRYI1GWmxnniUkZubZyGk1HtvVgqk0rqWjSVVsrznW4pY0cJB51C98+Z/fRw0ESodWQPAW7+lWoq5aeswR2MNkabH8Ei7VFiDvdwWY4AVxww7GebRvyebpNVIF1YMHB3IgHu7COg60H05rL7E1IRojdBpHUYoRv/9Km087aobQB75NhBvBYOw83CVRQ="
 
 language: python
 # Default Python version is usually 2.7
@@ -113,8 +108,6 @@ script:
 
 after_success:
     # Upload wheels to Rackspace container
-    - pip install wheelhouse-uploader
-    - python -m wheelhouse_uploader upload --local-folder
-          ${TRAVIS_BUILD_DIR}/wheelhouse/
-          --no-update-index
-          wheels
+    - ANACONDA_ORG="multibuild-wheels-staging";
+    - pip install git+https://github.com/Anaconda-Server/anaconda-client
+    - anaconda -t ${SCIPY_STAGING_UPLOAD_TOKEN} upload --force -u ${ANACONDA_ORG} ${TRAVIS_BUILD_DIR}/wheelhouse/*.
