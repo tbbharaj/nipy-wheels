@@ -118,7 +118,7 @@ before_install:
 install:
     # Maybe get and clean and patch source
     # Numpy 1.20 rejects Accelerate as installation option; get openblas
-    if [ -n "$BREW_OPENBLAS" ]; then brew install openblas; fi
+    - if [ -n "$BREW_OPENBLAS" ]; then brew install openblas; fi
     - clean_code $REPO_DIR $BUILD_COMMIT
     - build_wheel $REPO_DIR $PLAT
 
