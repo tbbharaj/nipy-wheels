@@ -10,13 +10,14 @@ env:
       - ANACONDA_ORG="nipy"
       # Following generated with
       # travis encrypt -r MacPython/nipy-wheels ANACONDA_SECRET=<the api key>
-      secure: "IqN7LjXWVBaijggUoB+ohjzFzH6nU0OyxznXEMgWoNxQJRiYXXKAt/Z5c4ldp9LUynefJO306M8foN4Gm8M8PNDlhjElzdOtIkGYtDKUXx7aXtrg8rPk1mzuM1F27er4Dbi7WFtpPClr8z8JKNNV50yeM1o2cXu4HgrPrRKgKk/2D8EQaPQlcOqul0O63D9AjVoW3EIG0aWEnZQQGfuGAPgyr0OS92LX2h1pcD2lNZHhqYmXmm5U0IwZmWL3Y0N7PO3VXcOCeIbiHAlJzhk4C4+86TT7DN+VhmfGyY/s61fOz47K+lEZLVqqeQki+HV75fti0XwYG7rjcSvDanNx+w2J/ogSLQpiNxZ0FZ+W8psXEaFUgFf7oXzRkW9gQ4KAsItEWHifq061ngr5AWLPLh+01LGP1Xg8wT5WEVUzBfD2uJPsy20DLcP9WGYa6cBNwtpqmUkdVgM3ZCPWlro7+v1kqxsKp91uh8SRKVlkD4mwbf0FnWxbNZ9v4Z9gs0pZoRclzL+/YcIcSTYAwiQRqaX7T0tpxaUZ0VYTMwCgpsufUX1idV1HV5+WKr9FUocoq+1RRW/JeXkisX9FRvem8cSGmnxB/hynlxoqzttCVMwtrKWPwxH4dHD+lavouho68Q7iBql1ZBZEhQy0O9NC1wr4Rg2CeDPZuzqVjmSPuXQ="
+      # where <the api key> has API write access to the anaconda.org
+      # organization named in $ANACONDA_ORG
+      - secure: "IqN7LjXWVBaijggUoB+ohjzFzH6nU0OyxznXEMgWoNxQJRiYXXKAt/Z5c4ldp9LUynefJO306M8foN4Gm8M8PNDlhjElzdOtIkGYtDKUXx7aXtrg8rPk1mzuM1F27er4Dbi7WFtpPClr8z8JKNNV50yeM1o2cXu4HgrPrRKgKk/2D8EQaPQlcOqul0O63D9AjVoW3EIG0aWEnZQQGfuGAPgyr0OS92LX2h1pcD2lNZHhqYmXmm5U0IwZmWL3Y0N7PO3VXcOCeIbiHAlJzhk4C4+86TT7DN+VhmfGyY/s61fOz47K+lEZLVqqeQki+HV75fti0XwYG7rjcSvDanNx+w2J/ogSLQpiNxZ0FZ+W8psXEaFUgFf7oXzRkW9gQ4KAsItEWHifq061ngr5AWLPLh+01LGP1Xg8wT5WEVUzBfD2uJPsy20DLcP9WGYa6cBNwtpqmUkdVgM3ZCPWlro7+v1kqxsKp91uh8SRKVlkD4mwbf0FnWxbNZ9v4Z9gs0pZoRclzL+/YcIcSTYAwiQRqaX7T0tpxaUZ0VYTMwCgpsufUX1idV1HV5+WKr9FUocoq+1RRW/JeXkisX9FRvem8cSGmnxB/hynlxoqzttCVMwtrKWPwxH4dHD+lavouho68Q7iBql1ZBZEhQy0O9NC1wr4Rg2CeDPZuzqVjmSPuXQ="
 
 
 language: python
 # Default Python version is usually 2.7
 python: 3.5
-sudo: required
 dist: trusty
 services: docker
 
