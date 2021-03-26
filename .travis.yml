@@ -106,6 +106,7 @@ matrix:
         - MB_PYTHON_VERSION=3.9
         - NP_BUILD_DEP="numpy==1.20"
         - NP_TEST_DEP="numpy==1.20"
+        - BREW_OPENBLAS=yes
 
 before_install:
     - BUILD_DEPENDS="$NP_BUILD_DEP Cython nibabel sympy $SP_DEP"
@@ -116,6 +117,8 @@ before_install:
 
 install:
     # Maybe get and clean and patch source
+    # Numpy 1.20 rejects Accelerate as installation option; get openblas
+    if [ -n "$BREW_OPENBLAS" ]; then brew install openblas; fi
     - clean_code $REPO_DIR $BUILD_COMMIT
     - build_wheel $REPO_DIR $PLAT
 
