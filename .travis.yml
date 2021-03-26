@@ -51,22 +51,34 @@ matrix:
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.7
+        - NP_BUILD_DEP="numpy==1.15"
+        - NP_TEST_DEP="numpy==1.15"
+        - SP_DEP=scipy
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.7
+        - NP_BUILD_DEP="numpy==1.15"
+        - NP_TEST_DEP="numpy==1.15"
         - PLAT=i686
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.8
         - SP_DEP=scipy
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.8
+        - NP_BUILD_DEP="numpy==1.18"
+        - NP_TEST_DEP="numpy==1.18"
+        - SP_DEP=scipy
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.8
+        - NP_BUILD_DEP="numpy==1.18"
+        - NP_TEST_DEP="numpy==1.18"
         - PLAT=i686
         - SP_DEP=scipy
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.9
+        - NP_BUILD_DEP="numpy==1.20"
+        - NP_TEST_DEP="numpy==1.20"
         - SP_DEP=scipy
     - os: linux
       env:
@@ -84,16 +96,22 @@ matrix:
       language: generic
       env:
         - MB_PYTHON_VERSION=3.7
+        - NP_BUILD_DEP="numpy==1.15"
+        - NP_TEST_DEP="numpy==1.15"
         - SP_DEP=scipy
     - os: osx
       language: generic
       env:
         - MB_PYTHON_VERSION=3.8
+        - NP_BUILD_DEP="numpy==1.18"
+        - NP_TEST_DEP="numpy==1.18"
         - SP_DEP=scipy
     - os: osx
       language: generic
       env:
         - MB_PYTHON_VERSION=3.9
+        - NP_BUILD_DEP="numpy==1.20"
+        - NP_TEST_DEP="numpy==1.20"
         - SP_DEP=scipy
 
 before_install:
