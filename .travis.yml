@@ -16,9 +16,9 @@ env:
 
 
 language: python
-python: 3.5
-dist: xenial
+dist: bionic
 services: docker
+os: linux
 
 matrix:
   exclude:
