@@ -16,9 +16,8 @@ env:
 
 
 language: python
-# Default Python version is usually 2.7
 python: 3.5
-dist: trusty
+dist: xenial
 services: docker
 
 matrix:
