@@ -1,6 +1,9 @@
 # vim ft=yaml
 # CI on Windows via appveyor
 
+# To enable Python 3.9
+image: Visual Studio 2019
+
 environment:
   global:
     BUILD_COMMIT: master
@@ -11,7 +14,6 @@ environment:
     EXTRA_FLAGS: ""
     ANACONDA_SECRET:
       secure: Ds0PkQD0b/QOfoNoiPuFJb01zg0Mq0dkAxIG2jRXocCAereSXdWw6XYaDrutHWme
-
 
   matrix:
     - PYTHON: C:\Python27
