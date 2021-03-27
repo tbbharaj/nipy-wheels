@@ -1,9 +1,6 @@
 # vim ft=yaml
 # CI on Windows via appveyor
 
-# To enable Python 3.9
-image: Visual Studio 2019
-
 environment:
   global:
     BUILD_COMMIT: master
@@ -38,10 +35,12 @@ environment:
       NP_BUILD_DEP: "numpy==1.18"
       NP_TEST_DEP: "numpy==1.18"
     - PYTHON: C:\Python39
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       EXTRA_FLAGS: "--traverse-namespace"
       NP_BUILD_DEP: "numpy==1.20"
       NP_TEST_DEP: "numpy==1.20"
     - PYTHON: C:\Python39-x64
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       EXTRA_FLAGS: "--traverse-namespace"
       NP_BUILD_DEP: "numpy==1.20"
       NP_TEST_DEP: "numpy==1.20"
