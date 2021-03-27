@@ -5,11 +5,15 @@ function pre_build {
     # Any stuff that you need to do before you start
     # building the wheels.
     # Runs in the root directory of this repository.
-    # Accelerate error only on macOS
+    # Workaround for Accelerate error; only on macOS.
     if [ -z "$IS_MACOS" ]; then return; fi
-    # Only for Numpy >= 1.20
-    local np_ver=$(python -c 'import numpy; print(numpy.__version__)')
-    if [ $(lex_ver $np_ver) -lt $(lex_ver 1.20) ]; then
+    # We need NP_BUILD_DEP to know which Numpy we will
+    # get - so this variable must be defined here.
+    # It will be for macOS builds that see the env vars
+    # from the travis config.
+    if [ -z "$NP_BUILD_DEP" ]; then return; fi
+    # Problem only arises for Numpy >= 1.20
+    if [ $(lex_ver $NP_BUILD_DEP) -lt $(lex_ver 1.20) ]; then
         return
     fi
     # Just in case.
