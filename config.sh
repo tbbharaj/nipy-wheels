@@ -12,8 +12,13 @@ function pre_build {
     # It will be for macOS builds that see the env vars
     # from the travis config.
     if [ -z "$NP_BUILD_DEP" ]; then return; fi
+    local np_ver=$(echo $NP_BUILD_DEP | sed -r 's/^numpy[=<>! ]+([0-9.]+)/\1/')
+    if ! [[ $np_ver =~ ^[0-9.]+$ ]]; then
+        echo "Could not parse NP_BUILD_DEP $NP_BUILD_DEP"
+        exit 1
+    fi
     # Problem only arises for Numpy >= 1.20
-    if [ $(lex_ver $NP_BUILD_DEP) -lt $(lex_ver 1.20) ]; then
+    if [ $(lex_ver $np_ver) -lt $(lex_ver 1.20) ]; then
         return
     fi
     # Just in case.
