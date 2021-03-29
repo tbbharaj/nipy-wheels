@@ -25,16 +25,15 @@ The wheel-building repository:
   (Manylinux1_).  ``delocate`` and ``auditwheel`` copy the required dynamic
   libraries into the wheel and relinks the extension modules against the
   copied libraries;
-* uploads the built wheels to http://wheels.scipy.org (a Rackspace container
-  kindly donated by Rackspace to scikit-learn).
+* uploads the built wheels to http://anaconda.org/nipy/nipy
 
 The resulting wheels are therefore self-contained and do not need any external
 dynamic libraries apart from those provided as standard by OSX / Linux as
 defined by the manylinux1 standard.
 
 The ``.travis.yml`` file in this repository has a line containing the API key
-for the Rackspace container encrypted with an RSA key that is unique to the
-repository - see http://docs.travis-ci.com/user/encryption-keys.  This
+for the Anaconda.org organization encrypted with an RSA key that is unique to
+the repository - see http://docs.travis-ci.com/user/encryption-keys.  This
 encrypted key gives the travis build permission to upload to the Rackspace
 directory pointed to by http://wheels.scipy.org.
 
@@ -70,66 +69,31 @@ hash.
 Uploading the built wheels to pypi
 ==================================
 
-Be careful, http://wheels.scipy.org points to a container on a distributed
-content delivery network.  It can take up to 15 minutes for the new wheel file
-to get updated into the container at http://wheels.scipy.org.
-
-The same contents appear at
-https://3f23b170c54c2533c070-1c8a9b3114517dc5fe17b7c3f8c63a43.ssl.cf2.rackcdn.com;
-you might prefer this address because it is https.
-
 When the wheels are updated, you can download them to your machine manually,
-and then upload them manually to pypi, or by using twine_.  You can also use a
-script for doing this, housed at :
-https://github.com/MacPython/terryfy/blob/master/wheel-uploader
+and then upload them manually to pypi, or by using twine_.
 
-For the ``wheel-uploader`` script, you'll need twine and `beautiful soup 4
-<bs4>`_.
+To download, use something like::
 
-You will typically have a directory on your machine where you store wheels,
-called a `wheelhouse`.   The typical call for `wheel-uploader` would then
-be something like::
+    python tools/download-wheels.py 0.5.0 --staging-url=https://anaconda.org/nipy/nipy --prefix=nipy -w wheelhouse
 
-    VERSION=0.4.0
-    CDN_URL=https://3f23b170c54c2533c070-1c8a9b3114517dc5fe17b7c3f8c63a43.ssl.cf2.rackcdn.com
-    wheel-uploader -r warehouse -u $CDN_URL -s -v -w ~/wheelhouse -t macosx nipy $VERSION
-    wheel-uploader -r warehouse -u $CDN_URL -s -v -w ~/wheelhouse -t manylinux1 nipy $VERSION
-    wheel-uploader -r warehouse -u $CDN_URL -s -v -w ~/wheelhouse -t win nipy $VERSION
+where `0.5.0` is the release version.
 
-where:
+You may want to add the `sdist` to the `wheelhouse`.
 
-* ``-r warehouse`` uses the upcoming Warehouse PyPI server (it is more
-  reliable than the current PyPI service for uploads);
-* ``-u`` gives the URL from which to fetch the wheels, here the https address,
-  for some extra security;
-* ``-s`` causes twine to sign the wheels with your GPG key;
-* ``-v`` means give verbose messages;
-* ``-w ~/wheelhouse`` means download the wheels from to the local directory
-  ``~/wheelhouse``.
+Then::
 
-``nipy`` is the root name of the wheel(s) to download / upload, and ``0.4.0``
-is the version to download / upload.
+    twine upload --sign wheelhouse/*
 
-In order to use the Warehouse PyPI server, you will need something like this
-in your ``~/.pypirc`` file::
+In order to use Twine, you will need something like this in your ``~/.pypirc``
+file::
 
     [distutils]
     index-servers =
         pypi
-        warehouse
 
     [pypi]
     username:your_user_name
     password:your_password
-
-    [warehouse]
-    repository: https://upload.pypi.io/legacy/
-    username: your_user_name
-    password: your_password
-
-So, in this case, ``wheel-uploader`` will download all wheels starting with
-``nipy-0.4.0-`` from http://wheels.scipy.org to ``~/wheelhouse``, then upload
-them to PyPI.
 
 Of course, you will need permissions to upload to PyPI, for this to work.
 
