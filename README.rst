@@ -78,11 +78,14 @@ To download, use something like::
 
 where `0.5.0` is the release version.
 
-You may want to add the `sdist` to the `wheelhouse`.
+You may want to add the `sdist` to the `wheelhouse`.  Build, copy with::
 
-Then::
+    (cd nipy && make source-release)
+    cp nipy/dist/*.tar.gz wheelhouse
 
-    twine upload --sign wheelhouse/*
+Then upload everything with::
+
+    twine upload --sign wheelhouse/nipy-0.5.0-*
 
 In order to use Twine, you will need something like this in your ``~/.pypirc``
 file::
