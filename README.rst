@@ -2,8 +2,9 @@
 Building and uploading nipy wheels
 ##################################
 
-We automate wheel building using this custom github repository that builds on
-the travis-ci OSX machines and the travis-ci Linux machines.
+We automate wheel building using this custom github
+repository that builds on the travis-ci macOS machines and
+the travis-ci Linux machines.
 
 The travis-ci interface for the builds is
 https://travis-ci.org/MacPython/nipy-wheels
@@ -21,21 +22,24 @@ The wheel-building repository:
 
 * does a fresh build of any required C / C++ libraries;
 * builds a nipy wheel, linking against these fresh builds;
-* processes the wheel using delocate_ (OSX) or auditwheel_ ``repair``
-  (Manylinux1_).  ``delocate`` and ``auditwheel`` copy the required dynamic
-  libraries into the wheel and relinks the extension modules against the
+* processes the wheel using delocate_ (macOS) or
+  auditwheel_ ``repair`` (Manylinux1_).  ``delocate`` and
+  ``auditwheel`` copy the required dynamic libraries into
+  the wheel and relinks the extension modules against the
   copied libraries;
 * uploads the built wheels to http://anaconda.org/nipy/nipy
 
 The resulting wheels are therefore self-contained and do not need any external
-dynamic libraries apart from those provided as standard by OSX / Linux as
+dynamic libraries apart from those provided as standard by macOS / Linux as
 defined by the manylinux1 standard.
 
-The ``.travis.yml`` file in this repository has a line containing the API key
-for the Anaconda.org organization encrypted with an RSA key that is unique to
-the repository - see http://docs.travis-ci.com/user/encryption-keys.  This
-encrypted key gives the travis build permission to upload to the Rackspace
-directory pointed to by http://wheels.scipy.org.
+The ``.travis.yml`` file in this repository has a line
+containing the API key for the Anaconda.org organization
+encrypted with an RSA key that is unique to the repository
+- see http://docs.travis-ci.com/user/encryption-keys.
+This encrypted key gives the travis build permission to
+upload to the Anaconda.org directory pointed to by
+https://anaconda.org/nipy/nipy .
 
 Triggering a build
 ==================
