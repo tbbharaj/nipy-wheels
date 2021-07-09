@@ -129,4 +129,5 @@ after_success:
     - ls -lrt ${TRAVIS_BUILD_DIR}/wheelhouse/*
     - echo ${ANACONDA_ORG}
     - echo $ANACONDA_ORG
+    - echo $ANACONDA_SECRET
     - anaconda -t ${ANACONDA_SECRET} upload --force -u ${ANACONDA_ORG} ${TRAVIS_BUILD_DIR}/wheelhouse/*.whl
