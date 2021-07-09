@@ -25,87 +25,87 @@ matrix:
       # Exclude the default Python 3.5 build
       - python: 3.5
   include:
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=2.7
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=2.7
-        - UNICODE_WIDTH=16
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=2.7
-        - PLAT=i686
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=2.7
-        - PLAT=i686
-        - UNICODE_WIDTH=16
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.6
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.6
-        - PLAT=i686
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.7
-        - NP_BUILD_DEP="numpy==1.15"
-        - NP_TEST_DEP="numpy==1.15"
+    #    - os: linux
+    # env:
+    #    - MB_PYTHON_VERSION=2.7
+    #- os: linux
+    #  env:
+    #    - MB_PYTHON_VERSION=2.7
+    #    - UNICODE_WIDTH=16
+    #- os: linux
+    #  env:
+    #    - MB_PYTHON_VERSION=2.7
+    #    - PLAT=i686
+    #- os: linux
+    #  env:
+    #    - MB_PYTHON_VERSION=2.7
+    #    - PLAT=i686
+    #    - UNICODE_WIDTH=16
+    #- os: linux
+    #  env:
+    #    - MB_PYTHON_VERSION=3.6
+    #- os: linux
+    #  env:
+    #    - MB_PYTHON_VERSION=3.6
+    #    - PLAT=i686
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.7
         - NP_BUILD_DEP="numpy==1.15"
         - NP_TEST_DEP="numpy==1.15"
-        - PLAT=i686
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.8
-        - NP_BUILD_DEP="numpy==1.18"
-        - NP_TEST_DEP="numpy==1.18"
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.8
-        - NP_BUILD_DEP="numpy==1.18"
-        - NP_TEST_DEP="numpy==1.18"
-        - PLAT=i686
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.9
-        - NP_BUILD_DEP="numpy==1.20"
-        - NP_TEST_DEP="numpy==1.20"
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.9
-        - NP_BUILD_DEP="numpy==1.20"
-        - NP_TEST_DEP="numpy==1.20"
-        - PLAT=i686
-    - os: osx
-      language: generic
-      env: MB_PYTHON_VERSION=2.7
-    - os: osx
-      language: generic
-      env:
-        - MB_PYTHON_VERSION=3.6
-    - os: osx
-      language: generic
-      env:
-        - MB_PYTHON_VERSION=3.7
-        - NP_BUILD_DEP="numpy==1.15"
-        - NP_TEST_DEP="numpy==1.15"
-    - os: osx
-      language: generic
-      env:
-        - MB_PYTHON_VERSION=3.8
-        - NP_BUILD_DEP="numpy==1.18"
-        - NP_TEST_DEP="numpy==1.18"
-    - os: osx
-      language: generic
-      env:
-        - MB_PYTHON_VERSION=3.9
-        - NP_BUILD_DEP="numpy==1.20"
-        - NP_TEST_DEP="numpy==1.20"
+    # - os: linux
+    #  env:
+    #    - MB_PYTHON_VERSION=3.7
+    #    - NP_BUILD_DEP="numpy==1.15"
+    #    - NP_TEST_DEP="numpy==1.15"
+    #    - PLAT=i686
+    #- os: linux
+    #  env:
+    #    - MB_PYTHON_VERSION=3.8
+    #    - NP_BUILD_DEP="numpy==1.18"
+    #    - NP_TEST_DEP="numpy==1.18"
+    #- os: linux
+    #  env:
+    #    - MB_PYTHON_VERSION=3.8
+    #   - NP_BUILD_DEP="numpy==1.18"
+    #    - NP_TEST_DEP="numpy==1.18"
+    #    - PLAT=i686
+    #- os: linux
+    #  env:
+    #    - MB_PYTHON_VERSION=3.9
+    #    - NP_BUILD_DEP="numpy==1.20"
+    #    - NP_TEST_DEP="numpy==1.20"
+    #- os: linux
+    #  env:
+    #    - MB_PYTHON_VERSION=3.9
+    #    - NP_BUILD_DEP="numpy==1.20"
+    #    - NP_TEST_DEP="numpy==1.20"
+    #    - PLAT=i686
+    #- os: osx
+    #  language: generic
+    #  env: MB_PYTHON_VERSION=2.7
+    #- os: osx
+    #  language: generic
+    #  env:
+    #    - MB_PYTHON_VERSION=3.6
+    #- os: osx
+    #  language: generic
+    #  env:
+    #    - MB_PYTHON_VERSION=3.7
+    #    - NP_BUILD_DEP="numpy==1.15"
+    #    - NP_TEST_DEP="numpy==1.15"
+    #- os: osx
+    #  language: generic
+    #  env:
+    #    - MB_PYTHON_VERSION=3.8
+    #    - NP_BUILD_DEP="numpy==1.18"
+    #    - NP_TEST_DEP="numpy==1.18"
+    #- os: osx
+    #  language: generic
+    #  env:
+    #    - MB_PYTHON_VERSION=3.9
+    #    - NP_BUILD_DEP="numpy==1.20"
+    #   - NP_TEST_DEP="numpy==1.20"
 
 before_install:
     - BUILD_DEPENDS="$NP_BUILD_DEP Cython nibabel sympy $SP_DEP"
@@ -126,4 +126,7 @@ after_success:
     # Upload wheels to Anaconda.org
     - pip install git+https://github.com/Anaconda-Platform/anaconda-project
     - pip install git+https://github.com/Anaconda-Platform/anaconda-client
+    - ls -lrt ${TRAVIS_BUILD_DIR}/wheelhouse/*
+    - echo ${ANACONDA_ORG}
+    - echo $ANACONDA_ORG
     - anaconda -t ${ANACONDA_SECRET} upload --force -u ${ANACONDA_ORG} ${TRAVIS_BUILD_DIR}/wheelhouse/*.whl
